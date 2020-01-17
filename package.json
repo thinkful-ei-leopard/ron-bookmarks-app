@@ -1,0 +1,21 @@
+{
+  "name": "ron-bookmarks-app",
+  "version": "1.0.0",
+  "description": "A client-side Bookmarking application that utilizes a RESTful Web API on the backend. Project for the Thinkful Engineering Immersion bootcamp.",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack-dev-server", 
+    "build": "webpack --mode production",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thinkful-ei-leopard/ron-bookmarks-app.git"
+  },
+  "author": "Ron Martin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/thinkful-ei-leopard/ron-bookmarks-app/issues"
+  },
+  "homepage": "https://github.com/thinkful-ei-leopard/ron-bookmarks-app#readme"
+}
