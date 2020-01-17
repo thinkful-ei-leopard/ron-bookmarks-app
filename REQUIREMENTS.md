@@ -1,7 +1,7 @@
 # Bookmarks App Requirements and User Stories
 ## For successful submission, you MUST:
 
-1. Push your final version to the gh-pages branch of your repo. Your repo should be inside the cohort's organization and named yourname-bookmarks-app.
+1. Push your final version to the ```gh-pages``` branch of your repo. Your repo should be inside the cohort's organization and named ```yourname-bookmarks-app```.
 2. Add the live GH Pages link to the header of your repo.
 3. Submit the repo URL at the bottom of this page.
 
@@ -18,13 +18,13 @@
     * Detailed view expands to additionally display description and a "Visit Site" link
 * I can remove a bookmark from my bookmark list
 * I receive appropriate feedback when I cannot submit a bookmark
-    * Check all validations in the API documentation (e.g.```html title``` and```html url``` field required)
-* I can select from a ```html dropdown``` (a ```html <select>``` element) a "minimum rating" to filter list by all bookmarks
+    * Check all validations in the API documentation (e.g.```title``` and```url``` field required)
+* I can select from a ```dropdown``` (a ```<select>``` element) a "minimum rating" to filter list by all bookmarks
     rated at or above the chosen selection
 * (Extension feature - optional) I can edit the rating and description of a bookmark in my list
 
 ## Technical Requirements
-* Use fetch for AJAX calls and jQuery for DOM manipulation
+* Use ```fetch``` for AJAX calls and jQuery for DOM manipulation
 * Use namespacing to adhere to good architecture practices
     * Minimal global variables
     * Create modules in separate files to organize your code
