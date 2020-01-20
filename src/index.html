@@ -4,10 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Bookmarks App</title>
+    <title>My Bookmarks</title>
     <link rel="stylesheet" href="index.css">
 </head>
 <body>
+    <header>
+        <h1>My Bookmarks</h1>
+    </header>
+    
+    <main class="container">
+        <section> <!-- div or nav? -->
+            <button>New</button>
+            <label for="pet-select">Filter by Stars:</label>
+
+            <select name="pets" id="pet-select">
+                <option value="">Filter by:</option>
+                <option value="dog">Dog</option>
+                <option value="cat">Cat</option>
+                <option value="hamster">Hamster</option>
+                <option value="parrot">Parrot</option>
+                <option value="spider">Spider</option>
+                <option value="goldfish">Goldfish</option>
+            </select>
+        </section>
+
+        <section>
+            <ul>
+                <li><p>BankofAmerica.com</p><span>3 Stars</span></li>
+                <li><p>Google.com</p><span>4 Stars</span></li>
+            </ul>
+        </section>
+
+    </main>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8=" crossorigin="anonymous"></script>
     <script src="index.js"></script>
 </body>
