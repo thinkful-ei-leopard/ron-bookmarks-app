@@ -31,7 +31,7 @@ api.getBookmarks()
 
 
 let newBookmarkName = 'google';
-let newUrlName = 'ttps://www.google.com';
+let newUrlName = 'https://www.google.com';
 let newDescription = 'search entginee';
 let newRating = 5;
 
@@ -45,7 +45,7 @@ const newBookmarkEntry = {
 api.createBookmark(newBookmarkEntry)
   .then(resp => console.log(resp))
   .catch((error) => {
-    console.log(`This is the error: ${error}`);
+    console.log(`This is the error: ${error.message}`);
     store.setError(error.message);
     bookmarksApp.renderError();
   });

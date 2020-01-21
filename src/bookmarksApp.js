@@ -18,7 +18,6 @@ const generateError = function (message) {
   return `
         
         <p>Error!  The following error has occurred: ${message}</p>
-        <button id='cancel-error'>Okay :-(</button>
     `;
 };
 
