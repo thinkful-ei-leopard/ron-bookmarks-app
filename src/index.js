@@ -1,23 +1,23 @@
 
-import api from '../api.js';
+import bookmarkApp from '../bookmarksApp.js';
+import api from './api.js';
+import store from './store.js';
 
-$(document).ready(function(){
-  // Check Radio-box
-  $('.rating input:radio').attr('checked', false);
+// $(document).ready(function(){
+//   // Check Radio-box
+//   $('.rating input:radio').attr('checked', false);
 
-  $('.rating input').click(function () {
-    $('.rating span').removeClass('checked');
-    $(this).parent().addClass('checked');
-  });
+//   $('.rating input').click(function () {
+//     $('.rating span').removeClass('checked');
+//     $(this).parent().addClass('checked');
+//   });
 
-  $('input:radio').change(
-    function(){
-      var userRating = this.value;
-      alert(userRating);
-    }); 
-});
-
-// $('form').click(event => console.log('works'));
+//   $('input:radio').change(
+//     function(){
+//       var userRating = this.value;
+//       alert(userRating);
+//     }); 
+// });
 
 api.getBookmarks()
   .then(resp => resp.json)
@@ -30,9 +30,9 @@ api.getBookmarks()
   });
 
 
-let newBookmarkName = "google";
-let newUrlName = "https://www.google.com";
-let newDescription = "search entginee";
+let newBookmarkName = 'google';
+let newUrlName = 'https://www.google.com';
+let newDescription = 'search entginee';
 let newRating = 5;
 
 const newBookmarkEntry = {
@@ -41,17 +41,20 @@ const newBookmarkEntry = {
   desc: newDescription,
   rating: newRating
 };
+
 api.createBookmark(newBookmarkEntry)
   .then(resp => console.log(resp))
   .catch((error) => {
-    console.log(error);
-    //store.setError(error.message);
-    //renderError();
+    console.log(`This is the error: ${error}`);
+    store.setError(error.message);
+    bookmarkApp.renderError();
   });
 
 
 const main = function() {
-  console.log('testing 123');
+  console.log('main function running');
+  bookmarkApp.bindEventListeners();
+  bookmarkApp.render();
 };
 
 $(main);
