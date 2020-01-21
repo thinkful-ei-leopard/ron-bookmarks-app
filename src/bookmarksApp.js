@@ -16,9 +16,18 @@ const renderError = function() {
 
 const generateError = function (message) {
   return `
-        
-        <p>Error!  The following error has occurred: ${message}</p>
+      <section class="error-content">
+        <button id="cancel-error">X</button>
+        <p>${message}</p>
+      </section>
     `;
+};
+
+const handleCloseError = function () {
+  $('.error-container').on('click', '#cancel-error', () => {
+    store.setError(null);
+    renderError();
+  });
 };
 
 const handleNewItemClicked = function () {};
@@ -40,6 +49,7 @@ const bindEventListeners = function() {
   handleDeleteBookmarkClicked();
   handleCloseViewClicked();
   handleCreateSubmit();
+  handleCloseError();
 };
 
 export default {

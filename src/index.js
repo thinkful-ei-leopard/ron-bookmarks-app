@@ -55,6 +55,12 @@ const main = function() {
   console.log('main function running');
   bookmarksApp.bindEventListeners();
   bookmarksApp.render();
+
+  api.getBookmarks()
+    .then((items) => {
+      items.forEach((item) => store.addItem(item));
+      bookmarksApp.render();
+    });
 };
 
 $(main);

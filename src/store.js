@@ -27,7 +27,12 @@ const setError = function(error) {
   this.error = error;
 };
 
+const addItem = function (item) {
+  this.store.bookmarks.push(item);
+};
+
 export default {
   store,
-  setError
+  setError,
+  addItem
 };
