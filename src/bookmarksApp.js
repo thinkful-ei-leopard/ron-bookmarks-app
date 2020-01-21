@@ -1,5 +1,6 @@
 // Render and Event Listeners
 import store from './store.js';
+import api from './api.js';
 //import view from './view.js';
 
 const render = function() {
@@ -41,12 +42,12 @@ const generateItemElement = function (item) {
   if (!item.expanded) {
     return `
     <li class="js-item-element" data-item-id="${item.id}"><p>${item.title}</p><span class="stars">${fullStar.repeat(numOfStars)}${emptyStar.repeat(numEmpty)}
-        <i class="fas fa-ellipsis-h"></i><i class="fas fa-trash-alt"></i><i class="fas fa-edit"></i></span>`;
+        <i class="fas fa-ellipsis-h"></i><i class="js-item-delete fas fa-trash-alt"></i><i class="fas fa-edit"></i></span>`;
   } 
   // if the expanded property is false, this will return
   return `
         <li class="js-item-element" data-item-id="${item.id}"><p>${item.title}</p><span class="stars">${fullStar.repeat(numOfStars)}${emptyStar.repeat(numEmpty)}
-        <i class="fas fa-ellipsis-h"></i><i class="fas fa-trash-alt"></i><i class="fas fa-edit"></i></span>
+        <i class="fas fa-ellipsis-h"></i><i class="js-item-delete fas fa-trash-alt"></i><i class="fas fa-edit"></i></span>
         <span class="description">
         <p><a href="${item.url}" class="visit_button">Visit Site</a><i class="fas fa-star"></i>
         ${item.desc}</p></span>`;
@@ -88,10 +89,19 @@ const handleBookmarkTitleClicked = function() {
 };
 
 const handleDeleteBookmarkClicked = function() {
-  // get id of item
-  // make DELETE request
-  // render page
-  
+  $('.js-bookmarks-list').on('click', '.js-item-delete', event => {
+    const id = getItemIdFromElement(event.currentTarget);
+    // makes a DELETE request to the server
+    // Gets the response
+    // updates the store and renders page
+    api.deleteBookmark(id)
+      .then(() => {
+        store.findAndDelete(id);
+        render();
+      });
+  });
+
+
 };
 
 const handleCloseViewClicked = function() {};

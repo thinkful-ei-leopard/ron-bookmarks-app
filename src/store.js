@@ -49,11 +49,17 @@ const addHTML = function(stringOne, stringTwo) {
   return newString;
 };
 
+const findAndDelete = function (id) {
+  this.store.bookmarks = this.store.bookmarks.filter(currentItem => currentItem.id !== id);
+  // change this.items to this.store.bookmarks?
+};
+
 export default {
   store,
   setError,
   addItem,
   findAndUpdate,
   findById,
+  findAndDelete,
   addHTML
 };
