@@ -45,5 +45,6 @@ const bindEventListeners = function() {
 
 export default {
   render,
+  renderError,
   bindEventListeners
 };

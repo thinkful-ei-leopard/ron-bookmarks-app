@@ -1,5 +1,5 @@
 
-import bookmarkApp from '../bookmarksApp.js';
+import bookmarksApp from '../bookmarksApp.js';
 import api from './api.js';
 import store from './store.js';
 
@@ -31,7 +31,7 @@ api.getBookmarks()
 
 
 let newBookmarkName = 'google';
-let newUrlName = 'https://www.google.com';
+let newUrlName = 'ttps://www.google.com';
 let newDescription = 'search entginee';
 let newRating = 5;
 
@@ -47,14 +47,14 @@ api.createBookmark(newBookmarkEntry)
   .catch((error) => {
     console.log(`This is the error: ${error}`);
     store.setError(error.message);
-    bookmarkApp.renderError();
+    bookmarksApp.renderError();
   });
 
 
 const main = function() {
   console.log('main function running');
-  bookmarkApp.bindEventListeners();
-  bookmarkApp.render();
+  bookmarksApp.bindEventListeners();
+  bookmarksApp.render();
 };
 
 $(main);
