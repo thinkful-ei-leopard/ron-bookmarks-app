@@ -1,13 +1,15 @@
 // Render and Event Listeners
 import store from './store.js';
+//import view from './view.js';
 
 const render = function() {
   renderError();
   let bookmarks = [...store.store.bookmarks];
   // render the shopping list in the DOM
   const bookmarkItemsString = generateBookmarksString(bookmarks);
-
+  
   // insert that HTML into the DOM
+
   $('.js-bookmarks-list').html(bookmarkItemsString);
 };
 
@@ -28,7 +30,7 @@ const generateError = function (message) {
       </section>
     `;
 };
-
+// This generates each item for the Inital view and expands any items that need to be expanded
 const generateItemElement = function (item) {
 
   let numOfStars = item.rating;
@@ -40,21 +42,23 @@ const generateItemElement = function (item) {
     return `
     <li class="js-item-element" data-item-id="${item.id}"><p>${item.title}</p><span class="stars">${fullStar.repeat(numOfStars)}${emptyStar.repeat(numEmpty)}
         <i class="fas fa-ellipsis-h"></i><i class="fas fa-trash-alt"></i><i class="fas fa-edit"></i></span>`;
-  }
+  } 
   // if the expanded property is false, this will return
   return `
-  <li class="js-item-element" data-item-id="${item.id}"><p>${item.title}</p><span class="stars">${fullStar.repeat(numOfStars)}${emptyStar.repeat(numEmpty)}
+        <li class="js-item-element" data-item-id="${item.id}"><p>${item.title}</p><span class="stars">${fullStar.repeat(numOfStars)}${emptyStar.repeat(numEmpty)}
         <i class="fas fa-ellipsis-h"></i><i class="fas fa-trash-alt"></i><i class="fas fa-edit"></i></span>
         <span class="description">
         <p><a href="${item.url}" class="visit_button">Visit Site</a><i class="fas fa-star"></i>
         ${item.desc}</p></span>`;
+  
 };
 
 const generateBookmarksString = function (bookmarksList) {
   const items = bookmarksList.map((item) => generateItemElement(item));
-  //console.log(items);
   return items.join('');
 };
+
+
 
 const getItemIdFromElement = function (item) {
   return $(item)
@@ -83,7 +87,12 @@ const handleBookmarkTitleClicked = function() {
   });
 };
 
-const handleDeleteBookmarkClicked = function() {};
+const handleDeleteBookmarkClicked = function() {
+  // get id of item
+  // make DELETE request
+  // render page
+  
+};
 
 const handleCloseViewClicked = function() {};
 

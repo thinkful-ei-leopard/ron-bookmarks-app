@@ -44,10 +44,16 @@ const findById = function (id) {
   return this.store.bookmarks.find(currentItem => currentItem.id === id);
 };
 
+const addHTML = function(stringOne, stringTwo) {
+  const newString = stringOne.concat(stringTwo);
+  return newString;
+};
+
 export default {
   store,
   setError,
   addItem,
   findAndUpdate,
-  findById
+  findById,
+  addHTML
 };
