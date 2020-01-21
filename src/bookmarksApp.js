@@ -30,35 +30,37 @@ const generateError = function (message) {
 };
 
 const generateItemElement = function (item) {
-  let itemTitle = `<span class="shopping-item shopping-item__checked">${item.name}</span>`;
-  console.log(item);
-  if (!item.checked) {
-    itemTitle = `
-      <form class="js-edit-item">
-        <input class="shopping-item" type="text" value="${item.name}" />
-      </form>
-    `;
-  }
+
   let numOfStars = item.rating;
   let numEmpty = 5 - item.rating;
   let fullStar = `<i class="fas fa-star"></i>`;
   let emptyStar = `<i class="far fa-star"></i>`;
-
-
+  // if the expanded property is true, this will return
+  if (!item.expanded) {
+    return `
+    <li class="js-item-element" data-item-id="${item.id}"><p>${item.title}</p><span class="stars">${fullStar.repeat(numOfStars)}${emptyStar.repeat(numEmpty)}
+        <i class="fas fa-ellipsis-h"></i><i class="fas fa-trash-alt"></i><i class="fas fa-edit"></i></span>`;
+  }
+  // if the expanded property is false, this will return
   return `
-  <li><p>${item.title}</p><span class="stars">${fullStar.repeat(numOfStars)}${emptyStar.repeat(numEmpty)}
+  <li class="js-item-element" data-item-id="${item.id}"><p>${item.title}</p><span class="stars">${fullStar.repeat(numOfStars)}${emptyStar.repeat(numEmpty)}
         <i class="fas fa-ellipsis-h"></i><i class="fas fa-trash-alt"></i><i class="fas fa-edit"></i></span>
         <span class="description">
         <p><a href="${item.url}" class="visit_button">Visit Site</a><i class="fas fa-star"></i>
-        ${item.description}</p></span>`;
+        ${item.desc}</p></span>`;
 };
 
 const generateBookmarksString = function (bookmarksList) {
   const items = bookmarksList.map((item) => generateItemElement(item));
-  console.log(items);
+  //console.log(items);
   return items.join('');
 };
 
+const getItemIdFromElement = function (item) {
+  return $(item)
+    .closest('.js-item-element')
+    .data('item-id');
+};
 
 const handleCloseError = function () {
   $('.error-container').on('click', '#cancel-error', () => {
@@ -71,7 +73,15 @@ const handleNewItemClicked = function () {};
 
 const handleFilterClicked = function() {};
 
-const handleBookmarkTitleClicked = function() {};
+const handleBookmarkTitleClicked = function() {
+  $('.js-bookmarks-list').on('click', '.js-item-element', event => {
+    const id = getItemIdFromElement(event.currentTarget);
+    const clickedBookmark = store.findById(id);
+    console.log(id);
+    store.findAndUpdate(id, {expanded: !clickedBookmark.expanded});
+    render();
+  });
+};
 
 const handleDeleteBookmarkClicked = function() {};
 

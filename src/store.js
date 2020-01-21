@@ -28,11 +28,26 @@ const setError = function(error) {
 };
 
 const addItem = function (item) {
+  // stores the value of the Bookmark object in store
+  // and adds the expanded property to it (set to false by default)
+  item.expanded = false;
   this.store.bookmarks.push(item);
+};
+
+const findAndUpdate = function(id, newData){
+  const target = this.findById(id); 
+  console.log(`target ${target}`);
+  Object.assign(target, newData);
+};
+
+const findById = function (id) {
+  return this.store.bookmarks.find(currentItem => currentItem.id === id);
 };
 
 export default {
   store,
   setError,
-  addItem
+  addItem,
+  findAndUpdate,
+  findById
 };
