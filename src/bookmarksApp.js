@@ -65,11 +65,11 @@ const generateAddBookmarkView = function() {
   <i class="js-item-close fas fa-times"></i>
   <h2>Add New Bookmark</h2> <!-- delete this after-->
 
-  <label for="new-bookmark">Add New Bookmark</label>
-  <input type="text" id="new-bookmark" name="add-bookmark" required minlength="4" size="20" placeholder="URL here" required>
+  <label for="new-bookmark">Enter Website URL:</label>
+  <input type="text" id="new-bookmark" name="bookmark-url" required minlength="4" size="25" placeholder="https://www.example-url.com" required>
   <fieldset>
       <label for="name-new-bookmark"></label>
-      <input type="text" id="name-new-bookmark" name="title-bookmark" required minlength="4" size="20" placeholder="Title of Bookmark here" required>
+      <input type="text" id="name-new-bookmark" name="bookmark-title" required minlength="4" size="20" placeholder="Title of Bookmark here" required>
 
 
       <div class="rating">
@@ -84,7 +84,7 @@ const generateAddBookmarkView = function() {
       <textarea id="description-text" name="bookmark-description" rows="5" cols="33" placeholder="Type your description here..."></textarea>
       
   </fieldset>
-  <button id="create-bookmark">Create</button>
+  <button id="create-bookmark-button">Create</button>
 </form>`;
 };
 
@@ -173,6 +173,8 @@ const handleCreateSubmit = function() {
   // get the response and put that into store
   // set store.store.adding back to false
   // and render the page correctly.
+
+  // WAS working as: $('main').on('submit', '#add-bookmark-form', event => )
   $('main').on('submit', '#add-bookmark-form', event => {
     event.preventDefault();
 
@@ -190,11 +192,17 @@ const handleCreateSubmit = function() {
     // });
     
     let myForm = document.getElementById('add-bookmark-form');
-    let formData = new FormData(myForm);
-    console.log(formData);
-    for(const entry of formData.entries()) {
-      console.log(entry);
-    }
+    let formData = new FormData(myForm); // FormData is an object that has all the input data as key-value pairs
+    let myFormData = {
+      title: formData.get('bookmark-title'),
+      url: formData.get('bookmark-url'),
+      desc: formData.get('bookmark-description'),
+      rating: formData.get('rating')
+    };
+    console.log(`myFormData keys: ${Object.keys(myFormData)} myFormData values: ${Object.values(myFormData)}`);
+    // for(const entry of formData.entries()) {
+    //   console.log(entry);
+    // }
     console.log('testing Create Submit button');
   });
 
