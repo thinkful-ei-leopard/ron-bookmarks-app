@@ -6,20 +6,19 @@ import api from './api.js';
 const render = function() {
   renderError();
   let bookmarks = [...store.store.bookmarks];
-  // render the shopping list in the DOM
-  const bookmarkItemsString = generateBookmarksString(bookmarks);
+  // this holds the value for the filtered number of stars (ie sort by 3 stars and above)
+  let filteredStars = store.store.filter;
+  // test value to see if it works: filteredStars = 3;
+
+  const bookmarkItemsString = generateBookmarksString(bookmarks, filteredStars);
   // Adds the initial view with the bookmarks html generated
   const initialViewString = generateInitView(bookmarkItemsString);
-  // this holds the value for the filtered number of stars (ie sort by 3 stars and above)
-  let filteredStars = store.filter;
 
-  console.log(store.store.adding);
+
   if(store.store.adding === true) {
-    console.log('generate ADD VIEW');
     $('header').addClass('hidden');
     return generateAddBookmarkView();
   } else {
-    console.log('WIPE THE PAGE');
     $('header').removeClass('hidden');
     $('main').html('');
     $('main').html(initialViewString);
@@ -50,7 +49,8 @@ const generateInitView = function(bookmarkItemsString) {
       <label for="star-select">Filter by Stars:<i class="fas fa-star"></i><i class="far fa-star"></i></label>
   
       <select name="star-filter" id="star-select">
-          <option value="">Filter by:</option>
+          <option value="">Filter by Stars</option>
+          <option value="0">0 Stars</option>
           <option value="1">1 Star<i class="fas fa-star"></i></option>
           <option value="2">2 Stars</option>
           <option value="3">3 Stars</option>
@@ -68,12 +68,16 @@ const generateInitView = function(bookmarkItemsString) {
 };
 
 // This generates each item for the Inital view and expands any items that need to be expanded
-const generateItemElement = function (item) {
+const generateItemElement = function (item, filterNum) {
 
   let numOfStars = item.rating;
   let numEmpty = 5 - item.rating;
   let fullStar = `<i class="fas fa-star"></i>`;
   let emptyStar = `<i class="far fa-star"></i>`;
+  // if the rating of this element is less than the Filter by Stars Value (i.e. 3 or more) then return none
+  if(item.rating < filterNum) {
+    return '';
+  }
   // if the expanded property is true, this will return
   if (!item.expanded) {
     return `
@@ -94,14 +98,11 @@ const generateAddBookmarkView = function() {
   let addingViewString = `    <form id="add-bookmark-form">
   <i class="js-item-close fas fa-times"></i>
   <h2>Add New Bookmark</h2> <!-- delete this after-->
-
   <label for="new-bookmark">Enter Website URL:</label>
   <input type="text" id="new-bookmark" name="bookmark-url" required minlength="4" size="25" placeholder="https://www.example-url.com" required>
   <fieldset>
       <label for="name-new-bookmark"></label>
       <input type="text" id="name-new-bookmark" name="bookmark-title" required minlength="4" size="20" placeholder="Title of Bookmark here" required>
-
-
       <div class="rating">
           <span><input type="radio" name="rating" id="str5" value="5"><label for="str5"></label></span>
           <span><input type="radio" name="rating" id="str4" value="4"><label for="str4"></label></span>
@@ -109,7 +110,6 @@ const generateAddBookmarkView = function() {
           <span><input type="radio" name="rating" id="str2" value="2"><label for="str2"></label></span>
           <span><input type="radio" name="rating" id="str1" value="1"><label for="str1"></label></span>
       </div>
-
       <label for="description-text"></label>
       <textarea id="description-text" name="bookmark-description" rows="5" cols="33" placeholder="Type your description here..."></textarea>
       
@@ -120,11 +120,10 @@ const generateAddBookmarkView = function() {
   $('main').html(addingViewString);
 };
 
-const generateBookmarksString = function (bookmarksList) {
-  const items = bookmarksList.map((item) => generateItemElement(item));
+const generateBookmarksString = function (bookmarksList, filterNum) {
+  const items = bookmarksList.map((item) => generateItemElement(item, filterNum));
   return items.join('');
 };
-
 
 
 const getItemIdFromElement = function (item) {
@@ -157,7 +156,17 @@ const handleNewItemClicked = function () {
   });
 };
 
-const handleFilterClicked = function() {};
+const handleFilterClicked = function() {
+  $('body').on('change', '#star-select', event => {
+    event.preventDefault();
+    const filterValue = parseInt($('#star-select').val());
+    console.log(filterValue);
+    store.store.filter = filterValue;
+    // store.bookmarks.forEach(element => element.expanded = false);
+    //render(filterValue);
+    render();
+  });  
+};
 
 const handleBookmarkTitleClicked = function() {
   $('body').on('click', '.js-item-element', event => {
@@ -212,7 +221,7 @@ const getFormData = function() {
     desc: formData.get('bookmark-description'),
     rating: formData.get('rating')
   };
-  console.log(`myFormData keys: ${Object.keys(myFormData)} myFormData values: ${Object.values(myFormData)}`);
+  //console.log(`myFormData keys: ${Object.keys(myFormData)} myFormData values: ${Object.values(myFormData)}`);
 
   return myFormData;
 };
