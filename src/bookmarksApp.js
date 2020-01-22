@@ -10,18 +10,18 @@ const render = function() {
   const bookmarkItemsString = generateBookmarksString(bookmarks);
   
   // insert that HTML into the DOM
-  //$('.js-bookmarks-list').html(bookmarkItemsString);
-  //console.log(`store adding is: ${store.store.adding}`);
+  $('.js-bookmarks-list').html(bookmarkItemsString);
+
+
+  
   if(store.store.adding === true) {
-    console.log(`store adding is: ${store.store.adding}`);
+    console.log(`RENDER store adding is: ${store.store.adding}`);
     $('.js-bookmarks-list').addClass('hidden');
     $('.init-view').addClass('hidden');
     $('.container').html(generateAddBookmarkView);
-  } else {
+  } else if(store.store.adding === false) {
     $('.js-bookmarks-list').html(bookmarkItemsString);
-    console.log(`store adding is: ${store.store.adding}`);
-    $('.js-bookmarks-list').removeClass('hidden');
-    $('.init-view').removeClass('hidden');
+    console.log(`RENDER store adding is: ${store.store.adding}`);
   }
 };
 
@@ -124,7 +124,10 @@ const handleNewItemClicked = function () {
   // show the correct view to add a new bookmark
   $('#new-bookmark-button').on('click', event => {
     console.log('new bookmark clicked');
-    store.store.adding = true;
+
+
+    //store.store.adding = true;
+    store.toggleAdding();
     render();
   });
 };
@@ -205,7 +208,7 @@ const handleCreateSubmit = function() {
         // get the response and put that into store
         store.addItem(newBookmark);
         // set store.store.adding back to false
-        store.store.adding = false;
+        store.toggleAdding();
         render();
       })
       .catch((error) => {
