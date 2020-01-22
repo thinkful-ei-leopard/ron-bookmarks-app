@@ -24,6 +24,10 @@
     padding-right: 10px;
   }
 
+  select { /* This allows font awesome icons to be put into dropdown tags using the correct unicode */
+    font-family: 'FontAwesome', 'Second Font name'
+  }
+
   .description > p{ /* this is for the description box below the title of the bookmark */
     background: white;
     padding-bottom: 15px;

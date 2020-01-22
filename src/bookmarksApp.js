@@ -43,19 +43,27 @@ const generateError = function (message) {
 
 // This generates the initial view (headers, buttons, etc) and adds any bookmarks from the database
 const generateInitView = function(bookmarkItemsString) {
+  const filterValue = $('#star-select').val();
+  let filterText = '(i.e 3 or more)';
+  if(filterValue) {
+    filterText = '&#xf005'.repeat(filterValue);
+  }
+  if(filterValue === '0') {
+    filterText = '0 Stars';
+  }
   let initString = `
   <section class="init-view"> <!-- div or nav? -->
       <button id="new-bookmark-button">New<i class="fas fa-bookmark"></i></button>
-      <label for="star-select">Filter by Stars:<i class="fas fa-star"></i><i class="far fa-star"></i></label>
+      <label for="star-select">Filter by Stars:</label>
   
       <select name="star-filter" id="star-select">
-          <option value="">Filter by Stars</option>
+          <option class="hidden" value="">${filterText}</option>
           <option value="0">0 Stars</option>
-          <option value="1">1 Star<i class="fas fa-star"></i></option>
-          <option value="2">2 Stars</option>
-          <option value="3">3 Stars</option>
-          <option value="4">4 Stars</option>
-          <option value="5">5 Stars</option>
+          <option value="1">&#xf005;</i></option>
+          <option value="2">&#xf005;&#xf005;</option>
+          <option value="3">&#xf005;&#xf005;&#xf005;</option>
+          <option value="4">&#xf005;&#xf005;&#xf005;&#xf005;</option>
+          <option value="5">&#xf005;&#xf005;&#xf005;&#xf005;&#xf005;</option>
       </select>
   </section>
   <section>
@@ -164,6 +172,7 @@ const handleFilterClicked = function() {
     store.store.filter = filterValue;
     // store.bookmarks.forEach(element => element.expanded = false);
     //render(filterValue);
+    //document.getElementById('star-select').value = store.store.filter;
     render();
   });  
 };
