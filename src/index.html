@@ -12,27 +12,10 @@
 <body>
     <header>
         <h1>My Bookmarks</h1>
+        <p class="error-container"></p>
     </header>
     
     <main class="container">
-
-        <section class="init-view"> <!-- div or nav? -->
-            <button id="new-bookmark-button">New<i class="fas fa-bookmark"></i></button>
-            <label for="star-select">Filter by Stars:<i class="fas fa-star"></i><i class="far fa-star"></i></label>
-        
-            <select name="star-filter" id="star-select">
-                <option value="">Filter by:</option>
-                <option value="1">1 Star<i class="fas fa-star"></i></option>
-                <option value="2">2 Stars</option>
-                <option value="3">3 Stars</option>
-                <option value="4">4 Stars</option>
-                <option value="5">5 Stars</option>
-            </select>
-        </section>
-        <section>
-            <ul class="js-bookmarks-list">
-        </section>
-        <p class="error-container"></p>
     </main>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8=" crossorigin="anonymous"></script>
     <script src="index.js" type="module"></script>
