@@ -37,10 +37,8 @@ const renderError = function() {
 
 const generateError = function (message) {
   return `
-      <section class="error-content">
         <button id="cancel-error">X</button>
         <p>${message}</p>
-      </section>
     `;
 };
 

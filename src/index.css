@@ -2,7 +2,7 @@
     box-sizing: border-box;
   }
 
-  .container, header {
+  .container, .error-container, header {
     width: 600px;
     margin: 0 auto;
     text-align: center;
