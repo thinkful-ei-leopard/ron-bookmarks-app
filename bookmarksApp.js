@@ -1,14 +1,12 @@
 // Render and Event Listeners
 import store from './store.js';
 import api from './api.js';
-//import view from './view.js';
 
 const render = function() {
   renderError();
   let bookmarks = [...store.store.bookmarks];
   // this holds the value for the filtered number of stars (ie sort by 3 stars and above)
   let filteredStars = store.store.filter;
-  // test value to see if it works: filteredStars = 3;
 
   const bookmarkItemsString = generateBookmarksString(bookmarks, filteredStars);
   // Adds the initial view with the bookmarks html generated
@@ -161,8 +159,6 @@ const handleNewItemClicked = function () {
   // This will hide the current views not needed
   // show the correct view to add a new bookmark
   $('body').on('click', '#new-bookmark-button', event => {
-    console.log('new bookmark clicked');
-    //store.store.adding = true;
     store.toggleAdding();
     render();
   });
@@ -172,11 +168,7 @@ const handleFilterClicked = function() {
   $('body').on('change', '#star-select', event => {
     event.preventDefault();
     const filterValue = parseInt($('#star-select').val());
-    console.log(filterValue);
     store.store.filter = filterValue;
-    // store.bookmarks.forEach(element => element.expanded = false);
-    //render(filterValue);
-    //document.getElementById('star-select').value = store.store.filter;
     render();
   });  
 };
@@ -185,7 +177,6 @@ const handleBookmarkTitleClicked = function() {
   $('body').on('click', '.js-item-element', event => {
     const id = getItemIdFromElement(event.currentTarget);
     const clickedBookmark = store.findById(id);
-    console.log(id);
     store.findAndUpdate(id, {expanded: !clickedBookmark.expanded});
     render();
   });
@@ -203,7 +194,6 @@ const handleDeleteBookmarkClicked = function() {
         render();
       })
       .catch((error) => {
-        console.log(`This is the error: ${error.message}`);
         store.setError(error.message);
         renderError();
       });
@@ -234,8 +224,6 @@ const getFormData = function() {
     desc: formData.get('bookmark-description'),
     rating: formData.get('rating')
   };
-  //console.log(`myFormData keys: ${Object.keys(myFormData)} myFormData values: ${Object.values(myFormData)}`);
-
   return myFormData;
 };
 
@@ -261,9 +249,7 @@ const handleCreateSubmit = function() {
         render();
       })
       .catch((error) => {
-        console.log(error);
         store.setError(error.message);
-        console.log(store.error);
         renderError();
       });
 

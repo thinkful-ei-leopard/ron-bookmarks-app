@@ -4,7 +4,6 @@ import store from './store.js';
 
 
 const main = function() {
-  console.log('main function running');
 
   api.getBookmarks()
     .then((items) => {
@@ -18,8 +17,6 @@ const main = function() {
     });
 
   bookmarksApp.bindEventListeners();
-  // THIS WAS CAUSING THE PAGE TO RENDER TWICE: bookmarksApp.render();
-
 };
 
 $(main);
