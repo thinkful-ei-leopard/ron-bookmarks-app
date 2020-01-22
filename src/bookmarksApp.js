@@ -10,13 +10,18 @@ const render = function() {
   const bookmarkItemsString = generateBookmarksString(bookmarks);
   
   // insert that HTML into the DOM
-  $('.js-bookmarks-list').html(bookmarkItemsString);
+  //$('.js-bookmarks-list').html(bookmarkItemsString);
   //console.log(`store adding is: ${store.store.adding}`);
-  if(store.store.adding) {
+  if(store.store.adding === true) {
     console.log(`store adding is: ${store.store.adding}`);
     $('.js-bookmarks-list').addClass('hidden');
     $('.init-view').addClass('hidden');
     $('.container').html(generateAddBookmarkView);
+  } else {
+    $('.js-bookmarks-list').html(bookmarkItemsString);
+    console.log(`store adding is: ${store.store.adding}`);
+    $('.js-bookmarks-list').removeClass('hidden');
+    $('.init-view').removeClass('hidden');
   }
 };
 
@@ -168,6 +173,22 @@ const handleDeleteBookmarkClicked = function() {
 
 const handleCloseViewClicked = function() {};
 
+const getFormData = function() {
+  // This will get all the data from our inputs and parse the data into an object
+  // that we can use to make POST requests with the bookmarks API
+  let myForm = document.getElementById('add-bookmark-form');
+  let formData = new FormData(myForm); // FormData is an object that has all the input data as key-value pairs
+  let myFormData = {
+    title: formData.get('bookmark-title'),
+    url: formData.get('bookmark-url'),
+    desc: formData.get('bookmark-description'),
+    rating: formData.get('rating')
+  };
+  console.log(`myFormData keys: ${Object.keys(myFormData)} myFormData values: ${Object.values(myFormData)}`);
+
+  return myFormData;
+};
+
 const handleCreateSubmit = function() {
   // this will create a POST request from the formdata()
   // get the response and put that into store
@@ -176,24 +197,21 @@ const handleCreateSubmit = function() {
 
   $('main').on('submit', '#add-bookmark-form', event => {
     event.preventDefault();
+    const formData = getFormData(); // This will get all the data from all our inputs and return an object we can use for POST
 
-    let myForm = document.getElementById('add-bookmark-form');
-    let formData = new FormData(myForm); // FormData is an object that has all the input data as key-value pairs
-    let myFormData = {
-      title: formData.get('bookmark-title'),
-      url: formData.get('bookmark-url'),
-      desc: formData.get('bookmark-description'),
-      rating: formData.get('rating')
-    };
-    console.log(`myFormData keys: ${Object.keys(myFormData)} myFormData values: ${Object.values(myFormData)}`);
-
-    api.createBookmark(myFormData)
+    // this will create a POST request from the formdata()
+    api.createBookmark(formData)
       .then(newBookmark => {
+        // get the response and put that into store
         store.addItem(newBookmark);
+        // set store.store.adding back to false
+        store.store.adding = false;
         render();
       })
       .catch((error) => {
+        console.log(error);
         store.setError(error.message);
+        console.log(store.error);
         renderError();
       });
 
