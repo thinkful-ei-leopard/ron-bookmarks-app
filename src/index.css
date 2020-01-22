@@ -71,6 +71,15 @@
     padding: 10px;
     margin-bottom: 10px;
   }
+  textarea {
+    width: 260px;
+    height: 150px;
+  }
+  fieldset > input {
+    height: 36px;
+    width: 220px;
+    padding: 10px;
+  }
   form .js-item-close {
     display: flex;
     justify-content: flex-end;
@@ -169,6 +178,9 @@ input[type=radio].with-font:focus + label:before {
   .container, .error-container, header {
     width: 500px;
   }
+  textarea {
+    width: 360px;
+  }
 }
 
 @media screen and (min-width: 800px) {
@@ -191,6 +203,15 @@ input[type=radio].with-font:focus + label:before {
   .js-item-element {
     font-size: 22px;
   }
+  textarea{
+    width: 500px;
+  }
+  form > label, fieldset .rating{
+    font-size: 20px;
+  }
+  form > label, #new-bookmark, #new-name-bookmark, textarea{
+    margin-bottom: 40px;
+  }
 }
 
 @media screen and (min-width: 1200px) {
@@ -201,11 +222,22 @@ input[type=radio].with-font:focus + label:before {
   h1 {
     font-size: 64px;
   }
+  h2 {
+    font-size: 52px;
+  }
+  form > label, fieldset .rating{
+    font-size: 24px;
+  }
   .js-item-element {
     font-size: 24px;
   }
 
   form .js-item-close {
     font-size: 48px;
+  }
+  
+  #create-bookmark-button {
+    font-size: 38px;
+    margin-top: 60px;
   }
 }
