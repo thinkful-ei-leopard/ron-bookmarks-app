@@ -8,20 +8,19 @@ const render = function() {
   let bookmarks = [...store.store.bookmarks];
   // render the shopping list in the DOM
   const bookmarkItemsString = generateBookmarksString(bookmarks);
-  
-  // insert that HTML into the DOM
-  $('.js-bookmarks-list').html(bookmarkItemsString);
+  // Adds the initial view with the bookmarks html generated
+  const initialViewString = generateInitView(bookmarkItemsString);
+  // this holds the value for the filtered number of stars (ie sort by 3 stars and above)
+  let filteredStars = store.filter;
 
-
-  
+  console.log(store.store.adding);
   if(store.store.adding === true) {
-    console.log(`RENDER store adding is: ${store.store.adding}`);
-    $('.js-bookmarks-list').addClass('hidden');
-    $('.init-view').addClass('hidden');
-    $('.container').html(generateAddBookmarkView);
-  } else if(store.store.adding === false) {
-    $('.js-bookmarks-list').html(bookmarkItemsString);
-    console.log(`RENDER store adding is: ${store.store.adding}`);
+    console.log('generate ADD VIEW');
+    return generateAddBookmarkView();
+  } else {
+    console.log('WIPE THE PAGE');
+    $('main').html('');
+    $('main').html(initialViewString);
   }
 };
 
@@ -41,6 +40,32 @@ const generateError = function (message) {
         <p>${message}</p>
       </section>
     `;
+};
+
+// This generates the initial view (headers, buttons, etc) and adds any bookmarks from the database
+const generateInitView = function(bookmarkItemsString) {
+  let initString = `
+  <section class="init-view"> <!-- div or nav? -->
+      <button id="new-bookmark-button">New<i class="fas fa-bookmark"></i></button>
+      <label for="star-select">Filter by Stars:<i class="fas fa-star"></i><i class="far fa-star"></i></label>
+  
+      <select name="star-filter" id="star-select">
+          <option value="">Filter by:</option>
+          <option value="1">1 Star<i class="fas fa-star"></i></option>
+          <option value="2">2 Stars</option>
+          <option value="3">3 Stars</option>
+          <option value="4">4 Stars</option>
+          <option value="5">5 Stars</option>
+      </select>
+  </section>
+  <section>
+      <ul class="js-bookmarks-list">`;
+
+  let initViewString = initString.concat(bookmarkItemsString);
+
+  return initViewString + `  </section>
+<p class="error-container"></p>`;
+
 };
 // This generates each item for the Inital view and expands any items that need to be expanded
 const generateItemElement = function (item) {
@@ -66,7 +91,7 @@ const generateItemElement = function (item) {
 };
 
 const generateAddBookmarkView = function() {
-  return `    <form id="add-bookmark-form">
+  let addingViewString = `    <form id="add-bookmark-form">
   <i class="js-item-close fas fa-times"></i>
   <h2>Add New Bookmark</h2> <!-- delete this after-->
 
@@ -91,6 +116,8 @@ const generateAddBookmarkView = function() {
   </fieldset>
   <button id="create-bookmark-button">Create</button>
 </form>`;
+  $('main').html('');
+  $('main').html(addingViewString);
 };
 
 const generateBookmarksString = function (bookmarksList) {
@@ -113,7 +140,7 @@ const getItemIdFromElement = function (item) {
   3) Render
 */
 const handleCloseError = function () {
-  $('.error-container').on('click', '#cancel-error', () => {
+  $('body').on('click', '#cancel-error', () => {
     store.setError(null);
     renderError();
   });
@@ -122,29 +149,18 @@ const handleCloseError = function () {
 const handleNewItemClicked = function () {
   // This will hide the current views not needed
   // show the correct view to add a new bookmark
-  $('#new-bookmark-button').on('click', event => {
+  $('body').on('click', '#new-bookmark-button', event => {
     console.log('new bookmark clicked');
-
-
     //store.store.adding = true;
     store.toggleAdding();
     render();
   });
 };
 
-// const OLD_handleNewItemClicked = function() {
-//   $('#new-bookmark-button').on('click', event => {
-//     console.log('new bookmark clicked');
-//     $('.js-bookmarks-list').addClass('hidden');
-//     $('.init-view').addClass('hidden');
-//     $('.container').html(generateAddBookmarkView);
-//   });
-// };
-
 const handleFilterClicked = function() {};
 
 const handleBookmarkTitleClicked = function() {
-  $('.js-bookmarks-list').on('click', '.js-item-element', event => {
+  $('body').on('click', '.js-item-element', event => {
     const id = getItemIdFromElement(event.currentTarget);
     const clickedBookmark = store.findById(id);
     console.log(id);
@@ -154,7 +170,7 @@ const handleBookmarkTitleClicked = function() {
 };
 
 const handleDeleteBookmarkClicked = function() {
-  $('.js-bookmarks-list').on('click', '.js-item-delete', event => {
+  $('body').on('click', '.js-item-delete', event => {
     const id = getItemIdFromElement(event.currentTarget);
     // makes a DELETE request to the server
     // Gets the response
