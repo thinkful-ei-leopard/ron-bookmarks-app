@@ -44,6 +44,8 @@ const generateError = function (message) {
 // This generates the initial view (headers, buttons, etc) and adds any bookmarks from the database
 const generateInitView = function(bookmarkItemsString) {
   const filterValue = $('#star-select').val();
+  // This will update the value in the dropdown to be whatever the current filter is:
+  // (i.e. if the filter is set to 2 stars, it will show 2 stars in the select box)
   let filterText = '(i.e 3 or more)';
   if(filterValue) {
     filterText = '&#xf005'.repeat(filterValue);
@@ -112,11 +114,12 @@ const generateAddBookmarkView = function() {
       <label for="name-new-bookmark"></label>
       <input type="text" id="name-new-bookmark" name="bookmark-title" required minlength="4" size="20" placeholder="Title of Bookmark here" required>
       <div class="rating">
-          <span><input type="radio" name="rating" id="str5" value="5"><label for="str5"></label></span>
-          <span><input type="radio" name="rating" id="str4" value="4"><label for="str4"></label></span>
-          <span><input type="radio" name="rating" id="str3" value="3"><label for="str3"></label></span>
-          <span><input type="radio" name="rating" id="str2" value="2"><label for="str2"></label></span>
-          <span><input type="radio" name="rating" id="str1" value="1"><label for="str1"></label></span>
+          <label>Rate</label>
+          <span><input class="with-font" type="radio" name="rating" id="str1" value="1"><label for="str1">1</label></span>
+          <span><input class="with-font" type="radio" name="rating" id="str2" value="2"><label for="str2">2</label></span>
+          <span><input class="with-font" type="radio" name="rating" id="str3" value="3"><label for="str3">3</label></span>
+          <span><input class="with-font" type="radio" name="rating" id="str4" value="4"><label for="str4">4</label></span>
+          <span><input class="with-font" type="radio" name="rating" id="str5" value="5"><label for="str5">5</label></span>
       </div>
       <label for="description-text"></label>
       <textarea id="description-text" name="bookmark-description" rows="5" cols="33" placeholder="Type your description here..."></textarea>
