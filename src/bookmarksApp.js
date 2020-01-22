@@ -63,10 +63,10 @@ const generateInitView = function(bookmarkItemsString) {
 
   let initViewString = initString.concat(bookmarkItemsString);
 
-  return initViewString + `  </section>
-<p class="error-container"></p>`;
+  return initViewString + '  </section>';
 
 };
+
 // This generates each item for the Inital view and expands any items that need to be expanded
 const generateItemElement = function (item) {
 
@@ -225,6 +225,8 @@ const handleCreateSubmit = function() {
         store.addItem(newBookmark);
         // set store.store.adding back to false
         store.toggleAdding();
+        // clears any errors if this is successful
+        store.setError(null);
         render();
       })
       .catch((error) => {
