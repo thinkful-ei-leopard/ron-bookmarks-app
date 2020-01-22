@@ -38,15 +38,12 @@
   .error-container {
     color: #D8000C;
     background-color: #d72323;
-    
   }
   #cancel-error {
     float: right;
     background: black;
     color: white;
   }
-
-
 
   ul {
     list-style: none;
@@ -77,11 +74,15 @@
     flex-direction: column;
     margin: 0 auto;
     width: 50%;
+    padding: 10px;
   }
   .init-view label {
     color: #14ffec;
     font-weight: 600;
     font-size: 22px;
+  }
+  .js-item-element {
+    padding-bottom: 15px;
   }
 
   .hidden {
@@ -155,10 +156,33 @@ input[type=radio].with-font:focus + label:before {
   .container, .error-container, header {
     width: 800px;
   }
+  .init-view {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 100%;
+    padding: 15px;
+  }
+  .init-view select {
+    height: 100%;
+  }
+  h1 {
+    font-size: 48px;
+  }
+  .js-item-element {
+    font-size: 22px;
+  }
 }
 
 @media screen and (min-width: 1200px) {
   .container, .error-container, header {
     width: 1200px;
+  }
+
+  h1 {
+    font-size: 64px;
+  }
+  .js-item-element {
+    font-size: 24px;
   }
 }

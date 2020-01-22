@@ -56,7 +56,7 @@ const generateInitView = function(bookmarkItemsString) {
   let initString = `
   <section class="init-view"> <!-- div or nav? -->
       <button id="new-bookmark-button">New<i class="fas fa-bookmark"></i></button>
-      <label for="star-select">Filter by Stars:</label>
+      <label for="star-select">Filter by Stars:
   
       <select name="star-filter" id="star-select">
           <option class="hidden" value="">${filterText}</option>
@@ -67,6 +67,7 @@ const generateInitView = function(bookmarkItemsString) {
           <option value="4">&#xf005;&#xf005;&#xf005;&#xf005;</option>
           <option value="5">&#xf005;&#xf005;&#xf005;&#xf005;&#xf005;</option>
       </select>
+      </label>
   </section>
   <section>
       <ul class="js-bookmarks-list">`;
