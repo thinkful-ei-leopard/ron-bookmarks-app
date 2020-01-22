@@ -11,6 +11,13 @@ const render = function() {
   
   // insert that HTML into the DOM
   $('.js-bookmarks-list').html(bookmarkItemsString);
+  //console.log(`store adding is: ${store.store.adding}`);
+  if(store.store.adding) {
+    console.log(`store adding is: ${store.store.adding}`);
+    $('.js-bookmarks-list').addClass('hidden');
+    $('.init-view').addClass('hidden');
+    $('.container').html(generateAddBookmarkView);
+  }
 };
 
 const renderError = function() {
@@ -112,11 +119,19 @@ const handleNewItemClicked = function () {
   // show the correct view to add a new bookmark
   $('#new-bookmark-button').on('click', event => {
     console.log('new bookmark clicked');
-    $('.js-bookmarks-list').addClass('hidden');
-    $('.init-view').addClass('hidden');
-    $('.container').html(generateAddBookmarkView);
+    store.store.adding = true;
+    render();
   });
 };
+
+// const OLD_handleNewItemClicked = function() {
+//   $('#new-bookmark-button').on('click', event => {
+//     console.log('new bookmark clicked');
+//     $('.js-bookmarks-list').addClass('hidden');
+//     $('.init-view').addClass('hidden');
+//     $('.container').html(generateAddBookmarkView);
+//   });
+// };
 
 const handleFilterClicked = function() {};
 
@@ -156,10 +171,23 @@ const handleCloseViewClicked = function() {};
 const handleCreateSubmit = function() {
   // this will create a POST request from the formdata()
   // get the response and put that into store
+  // set store.store.adding back to false
   // and render the page correctly.
   $('main').on('submit', '#add-bookmark-form', event => {
     event.preventDefault();
-    // // <form id="addBookmarkForm">
+
+    // USE THIS FOR THE POST
+    // api.createItem(newItemName)
+    // .then(res => res.json())
+    // .then( newItem => {
+    //   store.addItem(newItem);
+    //   render();
+    // })
+    // .catch((error) => {
+    //   console.log(error);
+    //   store.setError(error.message);
+    //   renderError();
+    // });
     
     let myForm = document.getElementById('add-bookmark-form');
     let formData = new FormData(myForm);
