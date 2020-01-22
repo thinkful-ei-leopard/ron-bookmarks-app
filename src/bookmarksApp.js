@@ -10,7 +10,6 @@ const render = function() {
   const bookmarkItemsString = generateBookmarksString(bookmarks);
   
   // insert that HTML into the DOM
-
   $('.js-bookmarks-list').html(bookmarkItemsString);
 };
 
@@ -55,7 +54,7 @@ const generateItemElement = function (item) {
 };
 
 const generateAddBookmarkView = function() {
-  return `    <form>
+  return `    <form id="add-bookmark-form">
   <i class="js-item-close fas fa-times"></i>
   <h2>Add New Bookmark</h2> <!-- delete this after-->
 
@@ -78,7 +77,7 @@ const generateAddBookmarkView = function() {
       <textarea id="description-text" name="bookmark-description" rows="5" cols="33" placeholder="Type your description here..."></textarea>
       
   </fieldset>
-  <button>Create</button>
+  <button id="create-bookmark">Create</button>
 </form>`;
 };
 
@@ -95,6 +94,12 @@ const getItemIdFromElement = function (item) {
     .data('item-id');
 };
 
+/* 
+  Reactful Pattern: Event Listeners
+  1) (optional) Get info from DOM related to user action
+  2) Change the store
+  3) Render
+*/
 const handleCloseError = function () {
   $('.error-container').on('click', '#cancel-error', () => {
     store.setError(null);
@@ -152,6 +157,19 @@ const handleCreateSubmit = function() {
   // this will create a POST request from the formdata()
   // get the response and put that into store
   // and render the page correctly.
+  $('main').on('submit', '#add-bookmark-form', event => {
+    event.preventDefault();
+    // // <form id="addBookmarkForm">
+    
+    let myForm = document.getElementById('add-bookmark-form');
+    let formData = new FormData(myForm);
+    console.log(formData);
+    for(const entry of formData.entries()) {
+      console.log(entry);
+    }
+    console.log('testing Create Submit button');
+  });
+
 };
 
 const bindEventListeners = function() {
