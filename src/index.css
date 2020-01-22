@@ -1,5 +1,18 @@
+/* COLORS: 
+  main: #212121;
+  secondary: #323232;
+  contrast: #00adb5;
+  highlight(light): #eeeeee;
+  contrast: #0d7377;
+  contrast: #14ffec;
+*/
+
 * {
     box-sizing: border-box;
+  }
+
+  body {
+    background: #212121;
   }
 
   .container, .error-container, header {
@@ -8,9 +21,13 @@
     text-align: center;
   }
 
+  h1, p {
+    color: #eeeeee;
+  }
+
   .error-container {
     color: #D8000C;
-			background-color: #FFBABA;
+		background-color: #FFBABA;
   }
   .fa-star {
     color: gold;
@@ -22,8 +39,8 @@
   }
 
   li {
-    background: grey;
-    border: 1px solid black;
+    background: #393e46;
+    border: 1px solid #eeeeee;
     padding-left: 10px;
     padding-right: 10px;
   }
@@ -33,7 +50,7 @@
   }
 
   .description > p{ /* this is for the description box below the title of the bookmark */
-    background: white;
+    background: #222831;
     padding-bottom: 15px;
     padding-top: 15px;
     padding-left: 10px;
@@ -47,6 +64,10 @@
   .visit_button {
     display: block;
     text-align: center;
+  }
+  
+  #new-bookmark-button {
+    background: black;
   }
 
   /* code for stars from stack overflow 
@@ -103,13 +124,13 @@ input[type=radio].with-font {
 input[type=radio].with-font + label:before {
   font-family: FontAwesome;
   display: inline-block;
-  content: "\f005";       /* "\f1db"; */
+  content: "\f005";       
   letter-spacing: 10px;
   font-size: 1.2em;
   color: #535353;
 }
 input[type=radio].with-font:checked + label:before {
-  content: "\f005";        /*    "\f00c"; */
+  content: "\f005";       
   font-size: 1.2em;
   color: darkgreen;
   letter-spacing: 5px;
@@ -119,6 +140,3 @@ input[type=radio].with-font:focus + label:before {
   font-weight: bold;
   color:orange;
 }
-
-
-/*  END OF CODE */
