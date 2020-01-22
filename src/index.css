@@ -37,12 +37,19 @@
   /* for the error message */
   .error-container {
     color: #D8000C;
-    background-color: #d72323;
+    background-color: #d72323;   
+  }
+  .error-container > p {
+    height: 50px;
+    line-height: 50px;
   }
   #cancel-error {
     float: right;
     background: black;
-    color: white;
+  }
+  #cancel-error > .fas {
+    color: red;
+    font-size: 22px;
   }
 
   ul {
@@ -56,7 +63,19 @@
     padding-left: 10px;
     padding-right: 10px;
   }
+  fieldset > input, fieldset .rating, textarea, #create-bookmark-button{
+    margin-top: 10px;
+  }
 
+  form > label, #new-bookmark, #new-name-bookmark, textarea{
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  form .js-item-close {
+    display: flex;
+    justify-content: flex-end;
+    font-size: 32px;
+  }
   select { /* This allows font awesome icons to be put into dropdown tags using the correct unicode */
     font-family: 'FontAwesome', 'Second Font name'
   }
@@ -184,5 +203,9 @@ input[type=radio].with-font:focus + label:before {
   }
   .js-item-element {
     font-size: 24px;
+  }
+
+  form .js-item-close {
+    font-size: 48px;
   }
 }
