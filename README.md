@@ -3,20 +3,21 @@ A client-side Bookmarking application that utilizes a RESTful Web API on the bac
 
 Author: Ron Martin
 
-## GH-Pages Link: www.mylinktoGHpageswebsitehere.com
+## GH-Pages Link: https://thinkful-ei-leopard.github.io/ron-bookmarks-app/
 
 ## User Stories Completed:
-
-(Copy and paste them from the requirements, only include completed requirements - ie dont include extension if you dont do it.)
-1. list user story 1 completed
-2. List user story 2 completed
-3. etc etc.
-
-We'll review the submission process
-Add a README to your project that includes brief overview and all user stories completed
-Make sure to publish your project to Github Pages, either using the web interface or creating a gh-pages branch
-Provide the link to the live app in the README and in the status area at top of repo
-
-### in the status area at top of repo
-
-Copy the link to github pages site ON THE TOP OF THE REPO PAGE (see video @10:37am)
+### As a user:
+* I can add bookmarks to my bookmark list. Bookmarks contain:
+    * title
+    * url link
+    * description
+    * rating (1-5) 
+* I can see a list of my bookmarks when I first open the app
+    * All bookmarks in the list default to a "condensed" view showing only title and rating
+* I can click on a bookmark to display the "detailed" view
+    * Detailed view expands to additionally display description and a "Visit Site" link
+* I can remove a bookmark from my bookmark list
+* I receive appropriate feedback when I cannot submit a bookmark
+    * Check all validations in the API documentation (e.g. ```title``` and ```url``` field required)
+* I can select from a ```dropdown``` (a ```<select>``` element) a "minimum rating" to filter list by all bookmarks
+    rated at or above the chosen selection
