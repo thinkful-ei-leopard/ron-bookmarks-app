@@ -16,9 +16,11 @@ const render = function() {
   console.log(store.store.adding);
   if(store.store.adding === true) {
     console.log('generate ADD VIEW');
+    $('header').addClass('hidden');
     return generateAddBookmarkView();
   } else {
     console.log('WIPE THE PAGE');
+    $('header').removeClass('hidden');
     $('main').html('');
     $('main').html(initialViewString);
   }
@@ -190,7 +192,16 @@ const handleDeleteBookmarkClicked = function() {
 
 };
 
-const handleCloseViewClicked = function() {};
+const handleCloseViewClicked = function() {
+  // This will handle when the big X is clicked on the addBookmarkView
+  // and return back to the inital view
+  $('main').on('click', '.js-item-close', event => {
+    store.toggleAdding();
+    // clears any errors if this is successful
+    store.setError(null);
+    render();
+  });
+};
 
 const getFormData = function() {
   // This will get all the data from our inputs and parse the data into an object
