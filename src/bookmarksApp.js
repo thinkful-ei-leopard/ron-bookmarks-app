@@ -174,23 +174,9 @@ const handleCreateSubmit = function() {
   // set store.store.adding back to false
   // and render the page correctly.
 
-  // WAS working as: $('main').on('submit', '#add-bookmark-form', event => )
   $('main').on('submit', '#add-bookmark-form', event => {
     event.preventDefault();
 
-    // USE THIS FOR THE POST
-    // api.createItem(newItemName)
-    // .then(res => res.json())
-    // .then( newItem => {
-    //   store.addItem(newItem);
-    //   render();
-    // })
-    // .catch((error) => {
-    //   console.log(error);
-    //   store.setError(error.message);
-    //   renderError();
-    // });
-    
     let myForm = document.getElementById('add-bookmark-form');
     let formData = new FormData(myForm); // FormData is an object that has all the input data as key-value pairs
     let myFormData = {
@@ -200,10 +186,17 @@ const handleCreateSubmit = function() {
       rating: formData.get('rating')
     };
     console.log(`myFormData keys: ${Object.keys(myFormData)} myFormData values: ${Object.values(myFormData)}`);
-    // for(const entry of formData.entries()) {
-    //   console.log(entry);
-    // }
-    console.log('testing Create Submit button');
+
+    api.createBookmark(myFormData)
+      .then(newBookmark => {
+        store.addItem(newBookmark);
+        render();
+      })
+      .catch((error) => {
+        store.setError(error.message);
+        renderError();
+      });
+
   });
 
 };
