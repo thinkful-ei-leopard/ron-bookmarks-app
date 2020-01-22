@@ -36,7 +36,7 @@ const renderError = function() {
 
 const generateError = function (message) {
   return `
-        <button id="cancel-error">X</button>
+        <button id="cancel-error"><i class="fas fa-times"></i></button>
         <p>${message}</p>
     `;
 };
@@ -92,12 +92,12 @@ const generateItemElement = function (item, filterNum) {
   if (!item.expanded) {
     return `
     <li class="js-item-element" data-item-id="${item.id}"><p>${item.title}</p><span class="stars">${fullStar.repeat(numOfStars)}${emptyStar.repeat(numEmpty)}
-        <i class="fas fa-ellipsis-h"></i><i class="js-item-delete fas fa-trash-alt"></i><i class="fas fa-edit"></i></span>`;
+        <i class="js-item-delete fas fa-trash-alt"></i></span>`;
   } 
   // if the expanded property is false, this will return
   return `
         <li class="js-item-element" data-item-id="${item.id}"><p>${item.title}</p><span class="stars">${fullStar.repeat(numOfStars)}${emptyStar.repeat(numEmpty)}
-        <i class="fas fa-ellipsis-h"></i><i class="js-item-delete fas fa-trash-alt"></i><i class="fas fa-edit"></i></span>
+        <i class="js-item-delete fas fa-trash-alt"></i></span>
         <span class="description">
         <p><a href="${item.url}" class="visit_button">Visit Site</a><i class="fas fa-star"></i>
         ${item.desc}</p></span>`;

@@ -12,35 +12,50 @@
   }
 
   body {
-    background: #212121;
+    background: #323232;
   }
 
   .container, .error-container, header {
-    width: 600px;
+    width: 320px;
     margin: 0 auto;
     text-align: center;
   }
 
-  h1, p {
+  h1, h2, p, label {
     color: #eeeeee;
   }
-
-  .error-container {
-    color: #D8000C;
-		background-color: #FFBABA;
+  /* Font Awesome icons */
+  .fas { 
+    color:  #14ffec;
+  }
+  .fas, .far { 
+    padding: 10px;
   }
   .fa-star {
     color: gold;
   }
+  /* for the error message */
+  .error-container {
+    color: #D8000C;
+    background-color: #d72323;
+    
+  }
+  #cancel-error {
+    float: right;
+    background: black;
+    color: white;
+  }
+
+
 
   ul {
     list-style: none;
     padding-left: 0px;
   }
 
-  li {
-    background: #393e46;
-    border: 1px solid #eeeeee;
+  li, fieldset {
+    background: #212121;
+    border: 1px solid #0d7377;
     padding-left: 10px;
     padding-right: 10px;
   }
@@ -50,11 +65,23 @@
   }
 
   .description > p{ /* this is for the description box below the title of the bookmark */
-    background: #222831;
+    background: #323232;
     padding-bottom: 15px;
     padding-top: 15px;
     padding-left: 10px;
     text-align: left;
+  }
+
+  .init-view {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    width: 50%;
+  }
+  .init-view label {
+    color: #14ffec;
+    font-weight: 600;
+    font-size: 22px;
   }
 
   .hidden {
@@ -66,49 +93,26 @@
     text-align: center;
   }
   
-  #new-bookmark-button {
-    background: black;
+  #star-select {
+    color: #eee;
+    background: #212121;
+    font-size: 22px;
+    font-weight: 600;
+  }
+  #new-bookmark-button, #star-select, #create-bookmark-button {
+    background: #212121;
+    color: #eee;
+    font-weight: 600;
+    font-size: 22px;
   }
 
-  /* code for stars from stack overflow 
-  .rating {
-    float:left;
-    width:300px;
-    
-}
-.rating span { float:right; position:relative; }
-.rating span input {
-    position:absolute;
-    top:0px;
-    left:0px;
-    opacity:0;
-}
-.rating span label {
-    display:inline-block;
-    width:30px;
-    height:30px;
-    text-align:center;
-    color:#FFF;
-    background:#ccc;
-    font-size:30px;
-    margin-right:2px;
-    line-height:30px;
-    border-radius:50%;
-    -webkit-border-radius:50%;
-    
-}
-.rating span:hover ~ span label,
-.rating span:hover label,
-.rating span.checked label,
-.rating span.checked ~ span label {
-    background:#F90;
-    color:#FFF;
-    
-} */
-
-/* my attempt at stars instead of the above text */
-
-
+  a {
+    color: #14ffec;
+    font-size: 18px;
+  }
+  a:visited {
+    color: #0d7377;
+  }
 
 input[type=radio].with-font {
   border: 0;
@@ -132,11 +136,29 @@ input[type=radio].with-font + label:before {
 input[type=radio].with-font:checked + label:before {
   content: "\f005";       
   font-size: 1.2em;
-  color: darkgreen;
+  color: #14ffec;
   letter-spacing: 5px;
   width: 35px: 5px;
 }
 input[type=radio].with-font:focus + label:before {
   font-weight: bold;
   color:orange;
+}
+
+@media screen and (min-width: 500px) {
+  .container, .error-container, header {
+    width: 500px;
+  }
+}
+
+@media screen and (min-width: 800px) {
+  .container, .error-container, header {
+    width: 800px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .container, .error-container, header {
+    width: 1200px;
+  }
 }
