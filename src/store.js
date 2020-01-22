@@ -54,6 +54,12 @@ const findAndDelete = function (id) {
   // change this.items to this.store.bookmarks?
 };
 
+const toggleAdding = function() {
+  console.log(`toggleAdding was: ${this.store.adding}`);
+  this.store.adding = !this.store.adding;
+  console.log(`toggleAdding is now: ${this.store.adding}`);
+};
+
 export default {
   store,
   setError,
@@ -61,5 +67,6 @@ export default {
   findAndUpdate,
   findById,
   findAndDelete,
-  addHTML
+  addHTML,
+  toggleAdding
 };
