@@ -3,7 +3,7 @@ A client-side Bookmarking application that utilizes a RESTful Web API on the bac
 
 Author: Ron Martin
 
-## GH-Pages Link: www.mylinktoGHpageswebsitehere.com
+## GH-Pages Link: https://thinkful-ei-leopard.github.io/ron-bookmarks-app/
 
 ## User Stories Completed:
 
